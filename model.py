@@ -18,3 +18,18 @@ with torch.no_grad():
     model.linear.bias.fill_(1.0)
 
 model.eval()
+
+
+# -------------------------
+# Model Warm-up
+# -------------------------
+
+dummy_input = torch.tensor(
+    [[0.0]],
+    dtype=torch.float32
+)
+
+with torch.inference_mode():
+    model(dummy_input)
+
+print("Model warm-up completed")
